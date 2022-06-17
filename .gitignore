@@ -2,3 +2,6 @@
 !README.md
 !docker-compose-production/.env
 !docker-compose-production/compose.yaml
+!docker-compose-production/README.md
+!kafka-zookeeper/
+!kafka-zookeeper/*

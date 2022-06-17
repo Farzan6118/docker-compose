@@ -1,4 +1,0 @@
-mongodb
-postgres
-rabbitmq
-redis

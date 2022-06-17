@@ -1,9 +1,9 @@
 services:
   mongodb:
     container_name: mongodb
-    environment:
-      - MONGO_DATA_DIR=${MONGO_DATA_DIR}
-      - MONGO_LOG_DIR=${MONGO_LOG_DIR}
+    # environment:
+    #   - MONGO_DATA_DIR=${MONGO_DATA_DIR}
+    #   - MONGO_LOG_DIR=${MONGO_LOG_DIR}
     image: mongo:5.0.9
     ports:
       - "27017:27017"

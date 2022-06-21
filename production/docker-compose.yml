@@ -1,0 +1,70 @@
+services:
+  # ----------mongodb----------
+  mongodb:
+    container_name: mongodb
+    image: mongo:5.0.9
+    ports:
+      - "27017:27017"
+    restart: unless-stopped
+    volumes:
+      - ./mongo-data:/data/db
+  # ----------postgres----------
+  postgres:
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=username
+      - POSTGRES_PASSWORD=password
+      - PGDATA=/data/postgres
+    image: postgres:14.3
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    volumes:
+      - ./postgres_data:/data/postgres
+  # ----------pgadmin---------
+  pgadmin:
+    container_name: pgadmin4
+    depends_on:
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    image: dpage/pgadmin4:6.10
+    restart: unless-stopped
+    ports:
+      - "5050:80"
+    volumes:
+      - ./pgadmin_data:/data/pgadmin
+  # ----------rabbitmq----------
+  rabbitmq:
+    container_name: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    image: rabbitmq:3.10.5-management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    restart: unless-stopped
+  # -----------redis-----------
+  redis:
+    container_name: redis
+    image: redis:7.0.2
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    volumes:
+      - ./redis-data:/data/db
+  # ----------consul----------
+  consul:
+    container_name: consul
+    image: consul:1.12.2
+    ports:
+      - 8500:8500
+      - 8600:8600
+    restart: unless-stopped
+volumes:
+  pgadmin_data:
+    external: true
+  postgres_data:
+    external: true

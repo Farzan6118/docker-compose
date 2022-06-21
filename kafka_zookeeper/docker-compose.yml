@@ -1,0 +1,32 @@
+# - NOTE: not tested yet ----
+services:
+  # ---------- zookeeper ----
+  zookeeper:
+    container_name: zookeeper
+    hostname: zookeeper
+    image: zookeeper:3.7.1
+    ports:
+      - 2181:2181
+    restart: unless-stopped
+    volumes:
+      - ./zookeeper-data:/data/db
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=zookeeper:2888:3888;2181
+    networks:
+      - app-tier
+  # ---------- kafka ----------
+  kafka:
+    container_name: kafka
+    image: bitnami/kafka:3.2.0
+    ports:
+      - "27017:27017"
+    restart: unless-stopped
+    volumes:  
+      - ./kafka-data:/bitnami/kafka
+    networks:
+      - app-tier
+  # -- networks ---------------
+networks:
+  app-tier:
+    driver: bridge

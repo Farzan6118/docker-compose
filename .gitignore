@@ -1,7 +1,7 @@
-*
-!README.md
-!docker-compose-production/.env
-!docker-compose-production/compose.yaml
-!docker-compose-production/README.md
-!kafka-zookeeper/
-!kafka-zookeeper/*
+production/mongo-data
+production/pgadmin_data
+production/postgres_data
+production/redis-data
+
+kafka_zookeeper/pgadmin_data
+kafka_zookeeper/postgres_data

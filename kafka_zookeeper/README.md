@@ -1,2 +1,3 @@
-# the followng docker-compose contains 
-# kafka & zookeeper
+## docker-compose
+> the compose file contains:
+> **kafka**, **zookeeper**

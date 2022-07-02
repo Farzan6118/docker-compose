@@ -5,7 +5,6 @@ services:
     image: ${MONGO_IMAGE}
     ports:
       - "27017:27017"
-      - "5672:5672"
     restart: ${RESTART_MODE}
     volumes:
       - ./mongo-data:/data/db

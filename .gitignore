@@ -5,3 +5,6 @@ production/redis-data
 
 kafka_zookeeper/pgadmin_data
 kafka_zookeeper/postgres_data
+
+minio_nginx/nginx.conf
+minio_nginx/templates

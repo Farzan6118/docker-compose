@@ -6,10 +6,13 @@ dev_package/redis_data
 
 minio/templates
 
-mongodb/mongo-data
+mongodb/mongo_data
 
 redis/redis_data
 
 rdbms/mysql_data
 rdbms/pgadmin_data
 rdbms/postgres_data
+
+keycloak/pgadmin_data
+keycloak/postgres_data

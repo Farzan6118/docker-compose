@@ -1,0 +1,10 @@
+services:
+  # -----------redis-----------
+  redis:
+    container_name: redis
+    image: ${REDIS_IMAGE}
+    ports:
+      - "6379:6379"
+    restart: ${RESTART_MODE}
+    volumes:
+      - ./redis_data:/data/db

@@ -1,0 +1,85 @@
+services:
+  # ----------mongodb----------
+  # mongodb:
+  #   container_name: mongo
+  #   image: ${MONGO_IMAGE}
+  #   ports:
+  #     - "27017:27017"
+  #   restart: ${RESTART_MODE}
+  #   volumes:
+  #     - ./mongo_data:/data/db
+  # ----------mysql----------
+  mysql:
+    container_name: mysql
+    cap_add:
+      - SYS_NICE
+    environment:
+      - MYSQL_DATABASE=${DEFAULT_USERNAME}
+      - MYSQL_ROOT_PASSWORD=${DEFAULT_PASSWORD}
+    image: ${MYSQL_IMAGE}
+    ports:
+      - '3306:3306'
+    restart: ${RESTART_MODE}
+    volumes:
+      - ./mysql_data:/data/db
+  # ----------postgres----------
+  postgres:
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=${DEFAULT_USERNAME}
+      - POSTGRES_PASSWORD=${DEFAULT_PASSWORD}
+      - PGDATA=/data/postgres
+    image: ${POSTGRES_IMAGE}
+    ports:
+      - "5432:5432"
+    restart: ${RESTART_MODE}
+    volumes:
+      - ./postgres_data:/data/postgres
+  # ----------pgadmin---------
+  pgadmin:
+    container_name: pgadmin
+    depends_on:
+      - postgres
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${DEFAULT_PASSWORD}
+    image: ${PGADMIN_IMAGE}
+    restart: ${RESTART_MODE}
+    ports:
+      - "5050:80"
+    volumes:
+      - ./pgadmin_data:/data/pgadmin
+  # ----------rabbitmq----------
+  rabbitmq:
+    container_name: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USERNAME}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
+    image: ${RABBITMQ_IMAGE}
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    restart: ${RESTART_MODE}
+  # -----------redis-----------
+  redis:
+    container_name: redis
+    image: ${REDIS_IMAGE}
+    ports:
+      - "6379:6379"
+    restart: ${RESTART_MODE}
+    volumes:
+      - ./redis_data:/data/db
+  # ----------consul----------
+  consul:
+    container_name: consul
+    image: ${CONSUL_IMAGE}
+    ports:
+      - 8500:8500
+      - 8600:8600
+    restart: ${RESTART_MODE}
+# --volumes-------------------
+volumes:
+  pgadmin_data:
+    external: true
+  postgres_data:
+    external: true

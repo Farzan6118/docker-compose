@@ -1,0 +1,13 @@
+services:
+  # ----------mongodb----------
+  mongodb:
+    container_name: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${DEFAULT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${DEFAULT_PASSWORD}
+    image: ${MONGO_IMAGE}
+    ports:
+      - "27017:27017"
+    restart: ${RESTART_MODE}
+    volumes:
+      - ./mongo-data:/data/db

@@ -1,50 +1,36 @@
 services:
   # ----------postgres----------
-  postgres_keycloak:
-    container_name: postgres_keycloak
+  postgres:
+    container_name: keycloak_postgres
     environment:
+      - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${DEFAULT_USERNAME}
       - POSTGRES_PASSWORD=${DEFAULT_PASSWORD}
-      - PGDATA=/data/postgres
+      # - PGDATA=/data/postgres
     image: ${POSTGRES_IMAGE}
     ports:
-      - 5432:5432
+      - 5433:5432
     restart: ${RESTART_MODE}
     volumes:
-      - ./postgres_data:/data/postgres
-  # ----------pgadmin---------
-  pgadmin_keycloak:
-    container_name: pgadmin_keycloak
-    depends_on:
-      - postgres_keycloak
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=${DEFAULT_EMAIL}
-      - PGADMIN_DEFAULT_PASSWORD=${DEFAULT_PASSWORD}
-    image: ${PGADMIN_IMAGE}
-    ports:
-      - 5050:80
-    restart: ${RESTART_MODE}
-    volumes:
-      - ./pgadmin_data:/data/pgadmin
+     - ./postgres_data:/data/postgres
 # ----------- keycloak -------------
   keycloak:
     container_name: keycloak
     depends_on:
-      - postgres_keycloak
+      - postgres
     environment:
-      - POSTGRES_USER=${DEFAULT_USERNAME}
-      - POSTGRES_PASSWORD=${DEFAULT_PASSWORD}
-      - PGADMIN_DEFAULT_EMAIL=${DEFAULT_EMAIL}
-      - PGADMIN_DEFAULT_PASSWORD=${DEFAULT_PASSWORD}
+      PROXY_ADDRESS_FORWARDING: 'true'
+      DB_VENDOR: POSTGRES
+      DB_ADDR: postgres
+      DB_DATABASE: ${POSTGRES_DB}
+      DB_USER: ${DEFAULT_USERNAME}
+      DB_PASSWORD: ${DEFAULT_PASSWORD}
+      KEYCLOAK_USER: ${DEFAULT_USERNAME}
+      KEYCLOAK_PASSWORD: ${DEFAULT_PASSWORD}
     image: ${KEYCLOAK_IMAGE}
-    networks:
-      - backend
+    # networks:
+    #   - postgres_keycloak
     restart: ${RESTART_MODE}
     ports:
       - 8180:8080
       - 8787:8787
-# -- networks ----------------------
-networks: 
-  backend: 
-    name: backend 
-    driver: bridge

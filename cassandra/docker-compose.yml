@@ -1,0 +1,10 @@
+services:
+  # ----------cassandra----------
+  cassandra:
+    container_name: cassandra
+    image: ${CASSANDRA_IMAGE}
+    environment:
+      - CASSANDRA_SEEDS=some-cassandra
+    ports:
+      - 7000:7000
+    restart: ${RESTART_MODE}

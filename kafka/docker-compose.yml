@@ -3,30 +3,31 @@ services:
   # ----------- kafka -------------
   kafka:
     container_name: kafka
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     image: ${KAFKA_IMAGE}
-    networks:
-      - app-tier
     ports:
-      - "27017:27017"
+      - 29092:29092
     restart: ${RESTART_MODE}
     volumes:  
-      - ./kafka-data:/bitnami/kafka
+      - ./kafka_data:/data/db
   # ---------- zookeeper ------------
   zookeeper:
     container_name: zookeeper
     environment:
-      ZOO_MY_ID: 1
-      ZOO_SERVERS: server.1=zookeeper:2888:3888;2181
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
     hostname: zookeeper
     image: ${ZOOKEEPER_IMAGE}
-    networks:
-      - app-tier
     ports:
-      - 2181:2181
+      - 22181:2181
     restart: ${RESTART_MODE}
     volumes:
-      - ./zookeeper-data:/data/db
-  # -- networks ---------------
-networks:
-  app-tier:
-    driver: bridge
+      - ./zookeeper_data:/data/db

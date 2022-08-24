@@ -14,5 +14,8 @@ rdbms/mysql_data
 rdbms/pgadmin_data
 rdbms/postgres_data
 
+kafka/zookeeper_data
+kafka/kafka_data
+
 keycloak/pgadmin_data
 keycloak/postgres_data

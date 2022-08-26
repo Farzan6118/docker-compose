@@ -14,10 +14,22 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     image: ${KAFKA_IMAGE}
     ports:
+      - 9092:9092
       - 29092:29092
     restart: ${RESTART_MODE}
     volumes:  
       - ./kafka_data:/data/db
+  # ---------- kafka_ui ------------
+  kafka_ui:
+    container_name: kafka_ui
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_ZOOKEEPER: localhost:2181
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+    image: ${KAFKA_UI_IMAGE}
+    ports:
+      - 9093:8080
+    restart: ${RESTART_MODE}
   # ---------- zookeeper ------------
   zookeeper:
     container_name: zookeeper
@@ -27,7 +39,7 @@ services:
     hostname: zookeeper
     image: ${ZOOKEEPER_IMAGE}
     ports:
-      - 22181:2181
+      - 2181:2181
     restart: ${RESTART_MODE}
     volumes:
       - ./zookeeper_data:/data/db

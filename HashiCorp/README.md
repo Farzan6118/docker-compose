@@ -1,3 +1,3 @@
 ## docker-compose
 > the compose file contains:
-> **consul**
+> **consul** **vault**

@@ -8,48 +8,50 @@ services:
       - MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD}
     image: ${MYSQL_IMAGE}
     ports:
-      - '3306:3306'
+      - "3306:3306"
+      - "33060:33060"
     restart: ${RESTART_MODE}
     volumes:
-      - ./mysql_data:/data/mysql
+      - ./mysql_data:/mysql/data
   # ----------postgres----------
   postgres:
     container_name: postgres
     environment:
       - POSTGRES_USER=${DEFAULT_USERNAME}
       - POSTGRES_PASSWORD=${DEFAULT_PASSWORD}
-      - PGDATA=/data/postgres
+      - PGDATA=/postgres/data
     image: ${POSTGRES_IMAGE}
     ports:
       - "5432:5432"
     restart: ${RESTART_MODE}
     volumes:
-      - ./postgres_data:/data/postgres
+      - ./postgres_data:/postgres/data
   # ----------pgadmin---------
   pgadmin:
     container_name: pgadmin
-    depends_on:
-      - postgres
     environment:
       - PGADMIN_DEFAULT_EMAIL=${DEFAULT_EMAIL}
       - PGADMIN_DEFAULT_PASSWORD=${DEFAULT_PASSWORD}
+      - PGADMIN_LISTEN_PORT=5050
     image: ${PGADMIN_IMAGE}
     ports:
-      - 5050:80
+      - "5050:80"
+      - "5051:443"
     restart: ${RESTART_MODE}
     volumes:
-      - ./pgadmin_data:/data/pgadmin
+      - ./pgadmin_data:/pgadmin/data
   # ----------adminer---------
   adminer:
+    container_name: adminer
     image: ${ADMINER_IMAGE}
-    restart: ${RESTART_MODE}
     ports:
-      - 5051:8080
+      - "5052:8080"
+    restart: ${RESTART_MODE}
 # --volumes-------------------
 volumes:
   mysql_data:
-    external: true
+    # external: true
   pgadmin_data:
-    external: true
+    # external: true
   postgres_data:
-    external: true
+    # external: true

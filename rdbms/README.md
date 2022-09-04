@@ -1,6 +1,6 @@
 ## docker-compose
 > the compose file contains:
-> **RDBMS** : MySQL and Postgresql
+> **RDBMS** : MySQL, Postgresql, pgadmin & adminer
 
 dont forget to run the following command before you start the docker-compose
 

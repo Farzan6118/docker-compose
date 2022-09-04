@@ -1,21 +1,25 @@
-
 dev_package/mysql_data
 dev_package/pgadmin_data
 dev_package/postgres_data
 dev_package/redis_data
 
+kafka/kafka_data
+kafka/zookeeper_data
+
+keycloak/pgadmin_data
+keycloak/postgres_data
+
 minio/templates
 
 mongodb/mongo_data
 
-redis/redis_data
+neo4j/neo4j_conf
+neo4j/neo4j_data
+neo4j/neo4j_logs
+neo4j/neo4j_plugins
 
 rdbms/mysql_data
 rdbms/pgadmin_data
 rdbms/postgres_data
 
-kafka/zookeeper_data
-kafka/kafka_data
-
-keycloak/pgadmin_data
-keycloak/postgres_data
+redis/redis_data

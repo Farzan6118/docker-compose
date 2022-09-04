@@ -2,16 +2,16 @@ services:
   # ----------mysql----------
   mysql:
     container_name: mysql
-    cap_add:
-      - SYS_NICE
     environment:
-      - MYSQL_ROOT_PASSWORD=${DEFAULT_PASSWORD}
+      - MYSQL_USER=${DEFAULT_USERNAME}
+      - MYSQL_PASS=${DEFAULT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD}
     image: ${MYSQL_IMAGE}
     ports:
       - '3306:3306'
     restart: ${RESTART_MODE}
     volumes:
-      - ./mysql_data:/data/db
+      - ./mysql_data:/data/mysql
   # ----------postgres----------
   postgres:
     container_name: postgres
@@ -35,14 +35,20 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=${DEFAULT_PASSWORD}
     image: ${PGADMIN_IMAGE}
     ports:
-      - "5050:80"
+      - 5050:80
     restart: ${RESTART_MODE}
     volumes:
       - ./pgadmin_data:/data/pgadmin
+  # ----------adminer---------
+  adminer:
+    image: ${ADMINER_IMAGE}
+    restart: ${RESTART_MODE}
+    ports:
+      - 5051:8080
 # --volumes-------------------
 volumes:
-  mysql:
-    driver: local
+  mysql_data:
+    external: true
   pgadmin_data:
     external: true
   postgres_data:

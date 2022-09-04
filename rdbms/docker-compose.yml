@@ -12,7 +12,7 @@ services:
       - "33060:33060"
     restart: ${RESTART_MODE}
     volumes:
-      - ./mysql_data:/mysql/data
+      - ./mysql_data:/var/lib/mysql
   # ----------postgres----------
   postgres:
     container_name: postgres
@@ -32,7 +32,6 @@ services:
     environment:
       - PGADMIN_DEFAULT_EMAIL=${DEFAULT_EMAIL}
       - PGADMIN_DEFAULT_PASSWORD=${DEFAULT_PASSWORD}
-      - PGADMIN_LISTEN_PORT=5050
     image: ${PGADMIN_IMAGE}
     ports:
       - "5050:80"
@@ -50,8 +49,8 @@ services:
 # --volumes-------------------
 volumes:
   mysql_data:
-    # external: true
-  pgadmin_data:
-    # external: true
+    external: true
   postgres_data:
+    external: true
+  pgadmin_data:
     # external: true

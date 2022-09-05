@@ -1,3 +1,3 @@
 ## docker-compose
 > the compose file contains:
-> **elasticsearch**
+> **elasticsearch** with kibana

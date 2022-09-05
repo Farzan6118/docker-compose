@@ -3,6 +3,9 @@ dev_package/pgadmin_data
 dev_package/postgres_data
 dev_package/redis_data
 
+Elastic/elastic_data
+Elastic/elastic_config
+
 kafka/kafka_data
 kafka/zookeeper_data
 

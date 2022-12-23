@@ -1,0 +1,10 @@
+services:
+  # -----------rethinkdb-----------
+  rethinkdb:
+    container_name: rethinkdb
+    image: ${RETHINKDB_IMAGE}
+    ports:
+      - "28015:8080"
+    restart: ${RESTART_MODE}
+    volumes:
+      - ./rethinkdb_data:/data/db

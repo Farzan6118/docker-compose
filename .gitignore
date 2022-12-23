@@ -26,3 +26,5 @@ rdbms/pgadmin_data
 rdbms/postgres_data
 
 redis/redis_data
+
+rethinkdb/rethinkdb_data

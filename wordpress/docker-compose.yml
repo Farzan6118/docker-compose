@@ -1,0 +1,30 @@
+services:
+  # -------wordpress--------
+  wordpress:
+    container_name: wordpress
+    environment:
+      WORDPRESS_DB_USER: ${USERNAME}
+      WORDPRESS_DB_PASSWORD: ${PASSWORD}
+      WORDPRESS_DB_NAME: ${DATABASE}
+      WORDPRESS_DB_HOST: ${DB_HOST}
+    image: ${WORDPRESS_IMAGE}
+    ports:
+      - "8080:80"
+    restart: ${RESTART_MODE}
+    volumes:
+      - wordpress:/var/www/html
+  # -----------db-----------
+  db:
+    environment:
+      MYSQL_USER: ${USERNAME}
+      MYSQL_PASSWORD: ${PASSWORD}
+      MYSQL_DATABASE: ${DATABASE}
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    image: ${WORDPRESS_IMAGE} 
+    restart: ${RESTART_MODE}
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:

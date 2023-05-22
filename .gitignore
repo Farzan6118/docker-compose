@@ -28,3 +28,8 @@ rdbms/postgres_data
 redis/redis_data
 
 rethinkdb/rethinkdb_data
+
+wordpress/**
+!wordpress/README.md
+!wordpress/docker-compose.yml
+!wordpress/.env

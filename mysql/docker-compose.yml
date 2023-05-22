@@ -1,0 +1,19 @@
+services:
+  # ----------mysql----------
+  mysql:
+    container_name: mysql
+    environment:
+      - MYSQL_USER=${DEFAULT_USERNAME}
+      - MYSQL_PASS=${DEFAULT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD}
+    image: ${MYSQL_IMAGE}
+    ports:
+      - "3306:3306"
+      - "33060:33060"
+    restart: ${RESTART_MODE}
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+# --volumes-------------------
+volumes:
+  mysql_data:
+    external: true

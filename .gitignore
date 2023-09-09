@@ -16,6 +16,8 @@ minio/templates
 
 mongodb/mongo_data
 
+mysql/mysql_data
+
 neo4j/neo4j_conf
 neo4j/neo4j_data
 neo4j/neo4j_logs

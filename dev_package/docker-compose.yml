@@ -1,13 +1,18 @@
 services:
   # ----------mongodb----------
-  # mongodb:
-  #   container_name: mongo
-  #   image: ${MONGO_IMAGE}
-  #   ports:
-  #     - "27017:27017"
-  #   restart: ${RESTART_MODE}
-  #   volumes:
-  #     - ./mongo_data:/data/db
+  mongo:
+    command: mongod
+    container_name: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${DEFAULT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${DEFAULT_PASSWORD}
+    image: ${MONGO_IMAGE}
+    ports:
+      - 27017:27017
+    restart: ${RESTART_MODE}
+    volumes:
+      - ./mongo_data:/data/db
+
   # ----------mysql----------
   mysql:
     container_name: mysql
@@ -18,10 +23,11 @@ services:
       - MYSQL_ROOT_PASSWORD=${DEFAULT_PASSWORD}
     image: ${MYSQL_IMAGE}
     ports:
-      - '3306:3306'
+      - "3306:3306"
     restart: ${RESTART_MODE}
     volumes:
       - ./mysql_data:/data/db
+
   # ----------postgres----------
   postgres:
     container_name: postgres
@@ -35,6 +41,7 @@ services:
     restart: ${RESTART_MODE}
     volumes:
       - ./postgres_data:/data/postgres
+
   # ----------pgadmin---------
   pgadmin:
     container_name: pgadmin
@@ -49,6 +56,7 @@ services:
       - "5050:80"
     volumes:
       - ./pgadmin_data:/data/pgadmin
+
   # ----------rabbitmq----------
   rabbitmq:
     container_name: rabbitmq
@@ -60,6 +68,7 @@ services:
       - "15672:15672"
       - "5672:5672"
     restart: ${RESTART_MODE}
+
   # -----------redis-----------
   redis:
     container_name: redis
@@ -69,6 +78,7 @@ services:
     restart: ${RESTART_MODE}
     volumes:
       - ./redis_data:/data/db
+
   # ----------consul----------
   consul:
     container_name: consul
@@ -77,6 +87,7 @@ services:
       - 8500:8500
       - 8600:8600
     restart: ${RESTART_MODE}
+
 # --volumes-------------------
 volumes:
   pgadmin_data:

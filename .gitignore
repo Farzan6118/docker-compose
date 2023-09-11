@@ -2,6 +2,7 @@ dev_package/mysql_data
 dev_package/pgadmin_data
 dev_package/postgres_data
 dev_package/redis_data
+dev_package/mongo_data
 
 Elastic/elastic_data
 Elastic/elastic_config

@@ -14,7 +14,8 @@ services:
     cap_add:
       - SYS_NICE
     environment:
-      - MYSQL_DATABASE=${DEFAULT_USERNAME}
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pass
       - MYSQL_ROOT_PASSWORD=${DEFAULT_PASSWORD}
     image: ${MYSQL_IMAGE}
     ports:

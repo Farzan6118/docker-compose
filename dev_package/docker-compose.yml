@@ -44,19 +44,19 @@ services:
       - ./postgres_data:/data/postgres
 
   # ----------pgadmin---------
-  pgadmin:
-    container_name: pgadmin
-    depends_on:
-      - postgres
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=${DEFAULT_EMAIL}
-      - PGADMIN_DEFAULT_PASSWORD=${DEFAULT_PASSWORD}
-    image: ${PGADMIN_IMAGE}
-    restart: ${RESTART_MODE}
-    ports:
-      - "5050:80"
-    volumes:
-      - ./pgadmin_data:/data/pgadmin
+  # pgadmin:
+  #   container_name: pgadmin
+  #   depends_on:
+  #     - postgres
+  #   environment:
+  #     - PGADMIN_DEFAULT_EMAIL=${DEFAULT_EMAIL}
+  #     - PGADMIN_DEFAULT_PASSWORD=${DEFAULT_PASSWORD}
+  #   image: ${PGADMIN_IMAGE}
+  #   restart: ${RESTART_MODE}
+  #   ports:
+  #     - "5050:80"
+  #   volumes:
+  #     - ./pgadmin_data:/data/pgadmin
 
   # ----------rabbitmq----------
   rabbitmq:

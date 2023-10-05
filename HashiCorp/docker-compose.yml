@@ -29,11 +29,18 @@ services:
   vault:
     container_name: vault
     environment:
-      - VAULT_DEV_ROOT_TOKEN_ID=myroot
+      - VAULT_DEV_ROOT_TOKEN_ID=root
     image: ${VAULT_IMAGE}
     ports:
       - 8200:8200
     restart: ${RESTART_MODE}
+    volumes:
+      - ./vault_data/data:/vault/data
+
+    # cap_add:
+    #   - IPC_LOCK
+    # command: server -dev -dev-root-token-id=root -dev-listen-address=0.0.0.0:8200
+
     # ----------networks----------
     # networks:
     # consul:

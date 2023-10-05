@@ -4,7 +4,12 @@ services:
     container_name: cassandra
     image: ${CASSANDRA_IMAGE}
     environment:
-      - CASSANDRA_SEEDS=some-cassandra
+      # - CASSANDRA_SEEDS=some-cassandra
+      - HEAP_NEWSIZE=256M
+      - MAX_HEAP_SIZE=1G
     ports:
       - 7000:7000
+      - 9042:9042
     restart: ${RESTART_MODE}
+    volumes: 
+      - ./cassandra_data:/var/lib/cassandra

@@ -5,6 +5,8 @@ services:
     image: ${CASSANDRA_IMAGE}
     environment:
       # - CASSANDRA_SEEDS=some-cassandra
+      # - CASSANDRA_USER=${DEFAULT_USERNAME}
+      # - CASSANDRA_PASSWORD=${DEFAULT_PASSWORD}
       - HEAP_NEWSIZE=256M
       - MAX_HEAP_SIZE=1G
     ports:

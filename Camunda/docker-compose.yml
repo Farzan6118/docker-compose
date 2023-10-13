@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  camunda:
+    container_name: Camunda
+    image: ${CAMUNDA_IMAGE}
+    ports:
+      - 26500:26500
+    restart: ${RESTART_MODE}
+    volumes:
+      - ./mongo_data:/data/db

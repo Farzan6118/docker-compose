@@ -1,6 +1,6 @@
 ## docker-compose
 > the compose file contains:
-> Postgresql
+> **Postgresql**
 
 do not forget to run the following command before you start the docker-compose
 

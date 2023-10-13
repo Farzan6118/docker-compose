@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  postgres:
+    container_name: PostgreSQL
+    environment:
+      - POSTGRES_USER=${DEFAULT_USERNAME}
+      - POSTGRES_PASSWORD=${DEFAULT_PASSWORD}
+      - PGDATA=/postgres/data
+    image: ${POSTGRES_IMAGE}
+    ports:
+      - "5432:5432"
+    restart: ${RESTART_MODE}
+    volumes:
+      - ./postgres_data:/postgres/data
+
+  # pgadmin:
+  #   container_name: pgadmin
+  #   environment:
+  #     - PGADMIN_DEFAULT_EMAIL=${DEFAULT_EMAIL}
+  #     - PGADMIN_DEFAULT_PASSWORD=${DEFAULT_PASSWORD}
+  #   image: ${PGADMIN_IMAGE}
+  #   ports:
+  #     - "5050:80"
+  #   restart: ${RESTART_MODE}
+  #   volumes:
+  #     - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  postgres_data:
+    external: true
+  # pgadmin_data:
+  #   external: true

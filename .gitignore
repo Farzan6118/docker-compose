@@ -1,9 +1,3 @@
-Develop_Package/mysql_data
-Develop_Package/pgadmin_data
-Develop_Package/postgres_data
-Develop_Package/redis_data
-Develop_Package/mongo_data
-
 Elasticsearch/elastic_data
 Elasticsearch/elastic_config
 
@@ -17,20 +11,19 @@ Apache_Kafka/zookeeper_data
 Keycloak/pgadmin_data
 Keycloak/postgres_data
 
-Minio/templates
+MinIO/templates
 
 MongoDB/mongo_data
 
 MySQL/mysql_data
 
+PostgreSQL/pgadmin_data
+PostgreSQL/postgres_data
+
 Neo4j/neo4j_conf
 Neo4j/neo4j_data
 Neo4j/neo4j_logs
 Neo4j/neo4j_plugins
-
-RDBMS/mysql_data
-RDBMS/pgadmin_data
-RDBMS/postgres_data
 
 Redis/redis_data
 

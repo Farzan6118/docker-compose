@@ -1,7 +1,7 @@
+version: "3.9"
 services:
-  # ------elasticsearch-------
   elasticsearch:
-    container_name: elasticsearch
+    container_name: Elasticsearch
     environment:
       - xpack.security.enabled=false
       - "discovery.type=single-node"
@@ -15,9 +15,9 @@ services:
     volumes:
       - ./elastic_data:/usr/share/elasticsearch/data
       - ./elastic_config:/usr/share/elasticsearch/config
-  # ---------kibana----------
+
   kibana:
-    container_name: kibana
+    container_name: Kibana
     image: ${KIBANA_IMAGE}
     environment:
       - ELASTICSEARCH_HOSTS=http://Elasticsearch:9200
@@ -29,7 +29,7 @@ services:
     ports:
       - 5601:5601
     restart: ${RESTART_MODE}
-# --networks------------------
+
 networks:
   ek-net:
     driver: bridge

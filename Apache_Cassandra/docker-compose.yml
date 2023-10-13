@@ -1,7 +1,7 @@
+version: "3.9"
 services:
-  # ----------cassandra----------
   cassandra:
-    container_name: cassandra
+    container_name: Cassandra
     image: ${CASSANDRA_IMAGE}
     environment:
       # - CASSANDRA_SEEDS=some-cassandra
@@ -13,5 +13,5 @@ services:
       - 7000:7000
       - 9042:9042
     restart: ${RESTART_MODE}
-    volumes: 
+    volumes:
       - ./cassandra_data:/var/lib/cassandra

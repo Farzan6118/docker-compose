@@ -1,7 +1,7 @@
+version: "3.9"
 services:
-  # ----------consul----------
   consul:
-    container_name: consul
+    container_name: Consul
     # environment:
     # - CONSUL_BIND_INTERFACE=eth0
     image: ${CONSUL_IMAGE}
@@ -14,7 +14,7 @@ services:
     # volumes:
     #  - ./server1.json:/consul/config/server1.json:ro
     #  - ./certs/:/consul/config/certs/:ro
-    # # -----consul-client-------
+
     # consul-client:
     #   command: "agent"
     #   container_name: consul-client
@@ -25,9 +25,9 @@ services:
     #   volumes:
     #    - ./client.json:/consul/config/client.json:ro
     #    - ./certs/:/consul/config/certs/:ro
-    # ----------vault----------
+
   vault:
-    container_name: vault
+    container_name: Vault
     environment:
       - VAULT_DEV_ROOT_TOKEN_ID=root
     image: ${VAULT_IMAGE}
@@ -41,7 +41,6 @@ services:
     #   - IPC_LOCK
     # command: server -dev -dev-root-token-id=root -dev-listen-address=0.0.0.0:8200
 
-    # ----------networks----------
     # networks:
     # consul:
     # driver: bridge

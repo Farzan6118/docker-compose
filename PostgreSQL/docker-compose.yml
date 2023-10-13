@@ -14,7 +14,7 @@ services:
       - ./postgres_data:/postgres/data
 
   # pgadmin:
-  #   container_name: pgadmin
+  #   container_name: pgAdmin
   #   environment:
   #     - PGADMIN_DEFAULT_EMAIL=${DEFAULT_EMAIL}
   #     - PGADMIN_DEFAULT_PASSWORD=${DEFAULT_PASSWORD}

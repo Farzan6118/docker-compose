@@ -2,7 +2,7 @@
 services:
   # ----------- kafka -------------
   kafka:
-    container_name: kafka
+    container_name: Kafka
     depends_on:
       - zookeeper
     environment:
@@ -21,7 +21,7 @@ services:
       - ./kafka_data:/data/db
   # ---------- kafka_ui ------------
   kafka_ui:
-    container_name: kafka_ui
+    container_name: Kafka_UI
     environment:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_ZOOKEEPER: localhost:12181
@@ -32,7 +32,7 @@ services:
     restart: ${RESTART_MODE}
   # ---------- zookeeper ------------
   zookeeper:
-    container_name: zookeeper
+    container_name: ZooKeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 12181
       ZOOKEEPER_TICK_TIME: 2000

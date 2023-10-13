@@ -26,10 +26,3 @@ Neo4j/neo4j_logs
 Neo4j/neo4j_plugins
 
 Redis/redis_data
-
-RethinkDB/rethinkdb_data
-
-Wordpress/**
-!wordpress/README.md
-!wordpress/docker-compose.yml
-!wordpress/.env

@@ -1,7 +1,7 @@
+version: "3.9"
 services:
-  # ----------neo4j----------
   neo4j:
-    container_name: neo4j
+    container_name: Neo4j
     environment:
       - NEO4J_AUTH=${NEO4J_AUTH}
     image: ${NEO4J_IMAGE}
@@ -15,7 +15,7 @@ services:
       - ./neo4j_conf:/neo4j/conf
       - ./neo4j_logs:/neo4j/logs
       - ./neo4j_plugins:/neo4j/plugins
-# --volumes-------------------
+
 volumes:
   neo4j_data:
   neo4j_conf:

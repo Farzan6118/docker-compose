@@ -1,7 +1,7 @@
+version: "3.9"
 services:
-  # ----------postgres----------
   postgres:
-    container_name: keycloak_postgres
+    container_name: Keycloak_PostgreSQL
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${DEFAULT_USERNAME}
@@ -12,14 +12,14 @@ services:
       - 5433:5432
     restart: ${RESTART_MODE}
     volumes:
-     - ./postgres_data:/data/postgres
-# ----------- keycloak -------------
+      - ./postgres_data:/data/postgres
+
   keycloak:
-    container_name: keycloak
+    container_name: Keycloak
     depends_on:
       - postgres
     environment:
-      PROXY_ADDRESS_FORWARDING: 'true'
+      PROXY_ADDRESS_FORWARDING: "true"
       DB_VENDOR: POSTGRES
       DB_ADDR: postgres
       DB_DATABASE: ${POSTGRES_DB}

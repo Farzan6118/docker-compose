@@ -3,8 +3,8 @@ services:
   rabbitmq:
     container_name: rabbitmq
     environment:
-      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USERNAME}
-      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
+      - RABBITMQ_DEFAULT_USER=${DEFAULT_USERNAME}
+      - RABBITMQ_DEFAULT_PASS=${DEFAULT_PASSWORD}
     image: ${RABBITMQ_IMAGE}
     ports:
       - "15672:15672"

@@ -1,36 +1,65 @@
 version: "3.9"
 services:
   postgres:
-    container_name: Keycloak_PostgreSQL
+    container_name: Keycloak_Postgres
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root"]
+      timeout: 45s
+      interval: 10s
+      retries: 10
     environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${DEFAULT_USERNAME}
-      - POSTGRES_PASSWORD=${DEFAULT_PASSWORD}
-      # - PGDATA=/data/postgres
+      - POSTGRES_DB=keycloak
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=keycloak
+      - POSTGRES_HOST=postgres
+    networks:
+      - local
     image: ${POSTGRES_IMAGE}
     ports:
       - 5433:5432
     restart: ${RESTART_MODE}
     volumes:
-      - ./postgres_data:/data/postgres
+      - ./postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    container_name: pgadmin
+    image: ${PGADMIN_IMAGE}
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@pgadmin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - 5050:80
+    networks:
+      - local
 
   keycloak:
     container_name: Keycloak
+    image: ${KEYCLOAK_IMAGE}
+    command: start-dev
     depends_on:
       - postgres
     environment:
-      PROXY_ADDRESS_FORWARDING: "true"
-      DB_VENDOR: POSTGRES
-      DB_ADDR: postgres
-      DB_DATABASE: ${POSTGRES_DB}
-      DB_USER: ${DEFAULT_USERNAME}
-      DB_PASSWORD: ${DEFAULT_PASSWORD}
-      KEYCLOAK_USER: ${DEFAULT_USERNAME}
-      KEYCLOAK_PASSWORD: ${DEFAULT_PASSWORD}
-    image: ${KEYCLOAK_IMAGE}
-    # networks:
-    #   - postgres_keycloak
+      - DB_VENDOR=postgres
+      - DB_ADDR=postgres
+      - DB_DATABASE=keycloak
+      - DB_USER=keycloak
+      - DB_PASSWORD=keycloak
+      - KEYCLOAK_USER=user
+      - KEYCLOAK_PASSWORD=pass
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
     restart: ${RESTART_MODE}
     ports:
       - 8180:8080
       - 8787:8787
+    networks:
+      - local
+
+networks:
+  local:
+    name: local
+    driver: bridge
+
+volumes:
+  postgres_data:
+    external: true

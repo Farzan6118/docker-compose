@@ -1,3 +1,2 @@
 ## docker-compose
-> the compose file contains:
-> **mongodb**
+>mongodb: mongo:7.0.2

@@ -1,3 +1,2 @@
 ## docker-compose
-> the compose file contains:
-> **RabbitMQ**
+>RabbitMQ

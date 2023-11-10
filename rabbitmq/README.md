@@ -1,2 +1,2 @@
 ## docker-compose
->RabbitMQ
+rabbitmq:3.12.8-management

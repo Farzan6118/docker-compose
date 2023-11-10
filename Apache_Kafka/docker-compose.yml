@@ -17,7 +17,7 @@ services:
       - 19092:19092
       - 29092:29092
     restart: ${RESTART_MODE}
-    volumes:  
+    volumes:
       - ./kafka_data:/data/db
   # ---------- kafka_ui ------------
   kafka_ui:

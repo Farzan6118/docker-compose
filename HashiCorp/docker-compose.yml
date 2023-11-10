@@ -36,7 +36,6 @@ services:
     restart: ${RESTART_MODE}
     volumes:
       - ./vault_data/data:/vault/data
-
     # cap_add:
     #   - IPC_LOCK
     # command: server -dev -dev-root-token-id=root -dev-listen-address=0.0.0.0:8200

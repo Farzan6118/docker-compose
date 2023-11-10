@@ -1,3 +1,2 @@
 ## docker-compose
-> the compose file contains:
-> **cassandra**
+cassandra:4.1.3

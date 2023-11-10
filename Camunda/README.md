@@ -1,3 +1,2 @@
 ## docker-compose
-> the compose file contains:
-> **Camunda**
+camunda/camunda-bpm-platform:tomcat-7.20.0

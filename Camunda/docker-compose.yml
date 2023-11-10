@@ -7,4 +7,4 @@ services:
       - 26500:26500
     restart: ${RESTART_MODE}
     volumes:
-      - ./mongo_data:/data/db
+      - ./camunda_data:/data/db

@@ -1,3 +1,2 @@
 ## docker-compose
-> the compose file contains:
-> **redis**
+redis:7.2.3-alpine

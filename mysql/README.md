@@ -1,2 +1,2 @@
 ## docker-compose
->MySQL:mysql:8.0
+neo4j:5.12.0-community

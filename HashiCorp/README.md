@@ -1,3 +1,3 @@
 ## docker-compose
-> the compose file contains:
-> **consul** **vault**
+VAULT_IMAGE: hashicorp/vault:1.15
+CONSUL_IMAGE: hashicorp/consul:1.17

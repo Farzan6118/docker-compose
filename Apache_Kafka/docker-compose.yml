@@ -1,4 +1,5 @@
 # - NOTE: not tested yet
+version: "3.9"
 services:
   # ----------- kafka -------------
   kafka:

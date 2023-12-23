@@ -1,9 +1,41 @@
 version: "3.9"
 services:
+  keycloak:
+    container_name: Keycloak
+    image: ${KEYCLOAK_IMAGE}
+    command: start-dev
+    depends_on:
+      - postgres
+    environment:
+      - DB_VENDOR=postgres
+      - DB_ADDR=postgres
+      - DB_DATABASE=keycloak
+      - DB_USER=keycloak
+      - DB_PASSWORD=keycloak
+      - KEYCLOAK_USER=user
+      - KEYCLOAK_PASSWORD=pass
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    restart: ${RESTART_MODE}
+    ports:
+      - 8180:8080
+      - 8787:8787
+    networks:
+      - local
+
   postgres:
     container_name: Keycloak_Postgres
     healthcheck:
-      test: ["CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root"]
+      test:
+        [
+          "CMD",
+          "pg_isready",
+          "-q",
+          "-d",
+          "postgres",
+          "-U",
+          "root"
+        ]
       timeout: 45s
       interval: 10s
       retries: 10
@@ -29,29 +61,6 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=admin
     ports:
       - 5050:80
-    networks:
-      - local
-
-  keycloak:
-    container_name: Keycloak
-    image: ${KEYCLOAK_IMAGE}
-    command: start-dev
-    depends_on:
-      - postgres
-    environment:
-      - DB_VENDOR=postgres
-      - DB_ADDR=postgres
-      - DB_DATABASE=keycloak
-      - DB_USER=keycloak
-      - DB_PASSWORD=keycloak
-      - KEYCLOAK_USER=user
-      - KEYCLOAK_PASSWORD=pass
-      - KEYCLOAK_ADMIN=admin
-      - KEYCLOAK_ADMIN_PASSWORD=admin
-    restart: ${RESTART_MODE}
-    ports:
-      - 8180:8080
-      - 8787:8787
     networks:
       - local
 

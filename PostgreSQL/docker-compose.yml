@@ -12,7 +12,6 @@ services:
     restart: ${RESTART_MODE}
     volumes:
       - ./postgres_data:/postgres/data
-
   # pgadmin:
   #   container_name: pgAdmin
   #   environment:

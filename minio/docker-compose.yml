@@ -5,7 +5,7 @@ services:
     container_name: minio
     image: quay.io/minio/minio:latest
     command: server /data --console-address ":9001"
-    restart: always
+    restart: unless-stopped
     ports:
       - 9000:9000
       - 9001:9001

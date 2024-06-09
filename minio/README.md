@@ -1,2 +1,2 @@
 ## docker-compose
-bitnami/minio:2024.1.13
+quay.io/minio/minio:RELEASE.2024-06-06T09-36-42Z

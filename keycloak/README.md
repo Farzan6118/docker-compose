@@ -1,4 +1,4 @@
 ## docker-compose
-quay.io/keycloak/keycloak:24.0.2
-postgres:16.1-alpine3.17
-dpage/pgadmin4:8.4
+quay.io/keycloak/keycloak:24.0.5
+postgres:16.1-alpine3.19
+page/pgadmin4:8.8

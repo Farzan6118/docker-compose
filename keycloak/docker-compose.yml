@@ -1,68 +1,50 @@
+version: '3.8'
+
 services:
   postgres:
     container_name: postgres
-    healthcheck:
-      test: "exit 0"
-    environment:
-      POSTGRES_DB: keycloak
-      POSTGRES_USER: keycloak
-      POSTGRES_PASSWORD: keycloak
-    networks:
-      network_sso:
-        ipv4_address: "10.0.0.3"
     image: ${POSTGRES_IMAGE}
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5434:5432"
-    restart: ${RESTART_MODE}
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: ${RESTART_MODE}
+    networks:
+      - network_sso
 
   keycloak:
-    container_name: Keycloak
+    container_name: keycloak
     image: ${KEYCLOAK_IMAGE}
     command: start-dev
     depends_on:
       postgres:
         condition: service_healthy
     environment:
-
       KC_DB: postgres
       KC_DB_URL_HOST: postgres
-      KC_DB_URL_DATABASE: keycloak
-      KC_DB_PASSWORD: keycloak
-      KC_DB_USERNAME: keycloak
-      KC_DB_SCHEMA: public
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
-    restart: ${RESTART_MODE}
+      KC_DB_URL_DATABASE: ${POSTGRES_DB}
+      KC_DB_USERNAME: ${POSTGRES_USER}
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
     ports:
-      - 8180:8080
-      - 8787:8787
+      - "8180:8080"
+    restart: ${RESTART_MODE}
     networks:
-      network_sso:
-        ipv4_address: "10.0.0.2"
-
-  # pgadmin:
-  #   container_name: pgadmin
-  #   image: ${PGADMIN_IMAGE}
-  #   environment:
-  #     - PGADMIN_DEFAULT_EMAIL=admin@admin.com
-  #     - PGADMIN_DEFAULT_PASSWORD=admin
-  #   ports:
-  #     - 5050:80
-  #   networks:
-  #     network_sso:
-  #       ipv4_address: "10.0.0.4"
+      - network_sso
 
 networks:
   network_sso:
-    ipam:
-      # IP Address management
-      driver: default
-      # default = bridge
-      config:
-        - subnet: "10.0.0.0/24"
+    driver: bridge
 
 volumes:
   postgres_data:
-    external: true

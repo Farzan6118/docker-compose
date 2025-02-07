@@ -1,50 +1,22 @@
-version: '3.8'
-
 services:
-  postgres:
-    container_name: postgres
-    image: ${POSTGRES_IMAGE}
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    ports:
-      - "5434:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    restart: ${RESTART_MODE}
-    networks:
-      - network_sso
-
   keycloak:
     container_name: keycloak
-    image: ${KEYCLOAK_IMAGE}
+    image: quay.io/keycloak/keycloak:26.0.1
     command: start-dev
-    depends_on:
-      postgres:
-        condition: service_healthy
     environment:
       KC_DB: postgres
-      KC_DB_URL_HOST: postgres
-      KC_DB_URL_DATABASE: ${POSTGRES_DB}
-      KC_DB_USERNAME: ${POSTGRES_USER}
-      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
-      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
-      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_DB_URL_HOST: postgresql
+      KC_DB_URL_DATABASE: keycloak
+      KC_DB_USERNAME: user
+      KC_DB_PASSWORD: pass
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
     ports:
       - "8180:8080"
-    restart: ${RESTART_MODE}
+    restart: unless-stopped
     networks:
-      - network_sso
+      - shared_network
 
 networks:
-  network_sso:
-    driver: bridge
-
-volumes:
-  postgres_data:
+  shared_network:
+    external: true

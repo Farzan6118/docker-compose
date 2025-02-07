@@ -1,45 +1,41 @@
 version: "3.9"
-services:
-  consul:
-    container_name: Consul
-    # environment:
-    # - CONSUL_BIND_INTERFACE=eth0
-    image: ${CONSUL_IMAGE}
-    # networks:
-    # - consul
-    ports:
-      - 8500:8500
-      - 8600:8600
-    restart: ${RESTART_MODE}
-    # volumes:
-    #  - ./server1.json:/consul/config/server1.json:ro
-    #  - ./certs/:/consul/config/certs/:ro
 
-    # consul-client:
-    #   command: "agent"
-    #   container_name: consul-client
-    #   image: ${CONSUL_IMAGE}
-    #   networks:
-    #     - consul
-    #   restart: ${RESTART_MODE}
-    #   volumes:
-    #    - ./client.json:/consul/config/client.json:ro
-    #    - ./certs/:/consul/config/certs/:ro
+services:
+  # consul:
+  #   container_name: Consul
+  #   image: ${CONSUL_IMAGE}
+  #   ports:
+  #     - "8500:8500"
+  #     - "8600:8600"
+  #   restart: ${RESTART_MODE}
+
+  # Uncomment the following lines if custom configurations or certificates are required
+  # environment:
+  #   - CONSUL_BIND_INTERFACE=eth0
+  # volumes:
+  #   - ./server1.json:/consul/config/server1.json:ro
+  #   - ./certs/:/consul/config/certs/:ro
 
   vault:
     container_name: Vault
-    environment:
-      - VAULT_DEV_ROOT_TOKEN_ID=root
     image: ${VAULT_IMAGE}
     ports:
-      - 8200:8200
+      - "8200:8200"
     restart: ${RESTART_MODE}
+    environment:
+      - VAULT_DEV_ROOT_TOKEN_ID=root
     volumes:
-      - ./vault_data/data:/vault/data
+      - vault_data:/vault/data
+    # Uncomment if you want Vault to run in dev mode with additional options
+    # command: server -dev -dev-root-token-id=root -dev-listen-address=0.0.0.0:8200
     # cap_add:
     #   - IPC_LOCK
-    # command: server -dev -dev-root-token-id=root -dev-listen-address=0.0.0.0:8200
 
-    # networks:
-    # consul:
-    # driver: bridge
+volumes:
+  vault_data:
+    driver: local
+
+# Uncomment this section if a custom network is required
+# networks:
+#   consul:
+#     driver: bridge

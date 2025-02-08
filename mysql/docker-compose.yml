@@ -1,20 +1,29 @@
-version: "3.9"
 services:
   mysql:
-    container_name: MySQL
-    cap_add:
-      - SYS_NICE
+    container_name: mysql
+    image: mysql:8.0
     environment:
-      - MYSQL_USER=${DEFAULT_USERNAME}
-      - MYSQL_PASSWORD=${DEFAULT_PASSWORD}
-      - MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD}
-    image: ${MYSQL_IMAGE}
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+      MYSQL_ROOT_PASSWORD: root
     ports:
       - "3306:3306"
-    restart: ${RESTART_MODE}
     volumes:
       - ./mysql_data:/var/lib/mysql
+    networks:
+      - shared_network
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
 volumes:
   mysql_data:
-    external: true
+
+
+networks:
+  shared_network:
+    name: shared_network
+    driver: bridge

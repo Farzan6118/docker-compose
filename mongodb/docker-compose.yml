@@ -1,14 +1,30 @@
 version: "3.9"
 services:
   mongo:
+    container_name: mongodb
+    image: mongo:8.0.4
     command: mongod
-    container_name: MongoDB
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=${DEFAULT_USERNAME}
-      - MONGO_INITDB_ROOT_PASSWORD=${DEFAULT_PASSWORD}
-    image: ${MONGO_IMAGE}
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: pass
     ports:
-      - 27017:27017
-    restart: ${RESTART_MODE}
+      - "27017:27017"
     volumes:
       - ./mongo_data:/data/db
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "mongo", "--eval", "db.adminCommand('ping')" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - shared_network
+
+volumes:
+  mongo_data:
+
+
+networks:
+  shared_network:
+    name: shared_network
+    driver: bridge

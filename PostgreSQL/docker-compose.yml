@@ -1,26 +1,26 @@
 services:
-  postgres:
-    container_name: postgresql
-    image: postgres:16.3-alpine3.18
+  mysql:
+    container_name: mysql
+    image: ${MYSQL_IMAGE}
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: pass
-      PGDATA: /var/lib/postgresql/data
+      MYSQL_USER: ${DEFAULT_USERNAME}
+      MYSQL_PASSWORD: ${DEFAULT_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASSWORD}
     ports:
-      - '5432:5432'
+      - "3306:3306"
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data
+      - ./mysql_data:/var/lib/mysql
     networks:
       - shared_network
-    restart: unless-stopped
+    restart: ${RESTART_MODE}
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U user" ]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       interval: 30s
       timeout: 10s
       retries: 5
 
 volumes:
-  postgres_data:
+  mysql_data:
 
 
 networks:

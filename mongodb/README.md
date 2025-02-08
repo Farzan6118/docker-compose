@@ -1,2 +1,2 @@
 ## docker-compose
-mongo:7.0.2
+mongo:8.0.4

@@ -1,2 +1,2 @@
 ## docker-compose
-rabbitmq:4.0.2-management-alpine
+rabbitmq:4.0.5-management-alpine

@@ -1,10 +1,25 @@
-version: "3.9"
 services:
   redis:
     container_name: Redis
-    image: ${REDIS_IMAGE}
+    image: redis:7.4.2-alpine3.21
     ports:
       - "6379:6379"
-    restart: ${RESTART_MODE}
     volumes:
-      - ./redis_data:/data/db
+      - ./redis_data:/data
+    networks:
+      - shared_network
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+volumes:
+  redis_data:
+
+
+networks:
+  shared_network:
+    name: shared_network
+    driver: bridge

@@ -25,4 +25,6 @@ Neo4j/neo4j_data
 Neo4j/neo4j_logs
 Neo4j/neo4j_plugins
 
+RabbitMQ/rabbitmq_data
+
 Redis/redis_data

@@ -1,12 +1,29 @@
-version: "3.9"
 services:
   rabbitmq:
     container_name: RabbitMQ
+    image: rabbitmq:4.0.5-management-alpine
     environment:
-      - RABBITMQ_DEFAULT_USER=${DEFAULT_USERNAME}
-      - RABBITMQ_DEFAULT_PASS=${DEFAULT_PASSWORD}
-    image: ${RABBITMQ_IMAGE}
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=pass
     ports:
       - "15672:15672"
       - "5672:5672"
-    restart: ${RESTART_MODE}
+    volumes:
+      - ./rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - shared_network
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "rabbitmqctl", "status" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+volumes:
+  rabbitmq_data:
+
+
+networks:
+  shared_network:
+    name: shared_network
+    driver: bridge

@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   mongo:
     container_name: mongodb
@@ -18,13 +17,13 @@ services:
       timeout: 10s
       retries: 5
     networks:
-      - shared_network
+      - mongodb_shared_network
 
 volumes:
   mongo_data:
 
 
 networks:
-  shared_network:
-    name: shared_network
+  mongodb_shared_network:
+    name: mongodb_shared_network
     driver: bridge

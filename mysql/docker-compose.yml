@@ -11,7 +11,7 @@ services:
     volumes:
       - ./mysql_data:/var/lib/mysql
     networks:
-      - shared_network
+      - mysql_shared_network
     restart: unless-stopped
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
@@ -24,6 +24,6 @@ volumes:
 
 
 networks:
-  shared_network:
-    name: shared_network
+  mysql_shared_network:
+    name: mysql_shared_network
     driver: bridge

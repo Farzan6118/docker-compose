@@ -11,7 +11,7 @@ services:
     volumes:
       - ./rabbitmq_data:/var/lib/rabbitmq
     networks:
-      - shared_network
+      - rabbitmq_shared_network
     restart: unless-stopped
     healthcheck:
       test: [ "CMD", "rabbitmqctl", "status" ]
@@ -24,6 +24,7 @@ volumes:
 
 
 networks:
-  shared_network:
-    name: shared_network
+  rabbitmq_shared_network:
+    name: rabbitmq_shared_network
     driver: bridge
+

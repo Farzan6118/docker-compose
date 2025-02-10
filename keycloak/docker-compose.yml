@@ -15,8 +15,8 @@ services:
       - "8180:8080"
     restart: unless-stopped
     networks:
-      - shared_network
+      - postgres_shared_network
 
 networks:
-  shared_network:
+  postgres_shared_network:
     external: true

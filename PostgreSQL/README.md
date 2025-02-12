@@ -1,2 +1,2 @@
 ## docker-compose
-postgres:16.3-alpine3.19
+postgres:16.3-alpine3.18

@@ -1,46 +1,50 @@
-# - NOTE: not tested yet
-version: "3.9"
 services:
-  # ----------- kafka -------------
   kafka:
-    container_name: Kafka
-    depends_on:
-      - zookeeper
+    container_name: kafka
+    image: bitnami/kafka:3.9.0
     environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:12181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:19092,PLAINTEXT_HOST://localhost:29092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-    image: ${KAFKA_IMAGE}
+      # Node ID and Roles
+      KAFKA_CFG_NODE_ID: 1
+      KAFKA_CFG_BROKER_ID: 1
+      KAFKA_CFG_PROCESS_ROLES: controller,broker
+      KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+
+      # Kafka Listeners
+      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_CFG_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER
+
+      # Kafka Storage
+      KAFKA_CFG_LOG_DIRS: /bitnami/kafka/data
+      KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "true"
+
+      # Fix for Windows (Disables privileged mode)
+      ALLOW_ANONYMOUS_LOGIN: "yes"
+
     ports:
-      - 19092:19092
-      - 29092:29092
-    restart: ${RESTART_MODE}
+      - "9092:9092"
+
     volumes:
-      - ./kafka_data:/data/db
-  # ---------- kafka_ui ------------
+      - kafka_data:/bitnami/kafka/data
+
+    restart: unless-stopped
+
+  # ---------- Kafka UI ------------ 
   kafka_ui:
-    container_name: Kafka_UI
+    container_name: kafka_ui
+    image: provectuslabs/kafka-ui:v0.7.2
     environment:
-      KAFKA_CLUSTERS_0_NAME: local
-      KAFKA_CLUSTERS_0_ZOOKEEPER: localhost:12181
-      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:19092
-    image: ${KAFKA_UI_IMAGE}
+      KAFKA_CLUSTERS_0_NAME: "local"
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: "kafka:9092"
     ports:
-      - 19093:8080
-    restart: ${RESTART_MODE}
-  # ---------- zookeeper ------------
-  zookeeper:
-    container_name: ZooKeeper
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 12181
-      ZOOKEEPER_TICK_TIME: 2000
-    hostname: zookeeper
-    image: ${ZOOKEEPER_IMAGE}
-    ports:
-      - 12181:12181
-    restart: ${RESTART_MODE}
-    volumes:
-      - ./zookeeper_data:/data/db
+      - "19093:8080"
+    restart: unless-stopped
+    depends_on:
+      - kafka
+
+volumes:
+  kafka_data:
+    driver: local

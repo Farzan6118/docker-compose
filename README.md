@@ -26,11 +26,15 @@ This command will start the Docker containers defined in the ```docker-compose.y
 ## Folder Structure
 The project includes the following folders, each named according to the Docker images they contain:
 
-- Apache_Camel
-- Apache_Cassandra
-- Apache_Kafka
+- Apache
+   - Camel
+   - Cassandra
+   - Kafka
 - Camunda
-- Elasticsearch
+- Elastic
+   - elasticsearch
+   - logstash
+   - kibana
 - Hashicorp
    - console
    - vault

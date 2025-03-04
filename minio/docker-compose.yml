@@ -5,15 +5,15 @@ services:
     container_name: minio
     command: server /data --console-address ":9001"
     environment:
-      - MINIO_ROOT_USER=${MINIO_ROOT_USER}
-      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASS}
-    image: ${MINIO_IMAGE}
+      - MINIO_ROOT_USER=minioAdmin
+      - MINIO_ROOT_PASSWORD=minioAdmin
+    image: quay.io/minio/minio:RELEASE.2024-06-22T05-26-45Z
     networks:
       - minio_net
     ports:
       - 9000:9000
       - 9001:9001
-    restart: ${RESTART_MODE}
+    restart: unless-stopped
     volumes:
       - ~/minio/data:/data
 

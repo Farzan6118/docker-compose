@@ -1,2 +1,2 @@
 ## docker-compose
-hashicorp/vault:1.17.3
+hashicorp/vault:1.19.0

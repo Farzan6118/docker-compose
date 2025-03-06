@@ -1,17 +1,26 @@
-version: "3.9"
 services:
   cassandra:
     container_name: Cassandra
-    image: ${CASSANDRA_IMAGE}
+    image: cassandra:4.1.3
     environment:
       # - CASSANDRA_SEEDS=some-cassandra
-      # - CASSANDRA_USER=${DEFAULT_USERNAME}
-      # - CASSANDRA_PASSWORD=${DEFAULT_PASSWORD}
+      # - CASSANDRA_USER=user
+      # - CASSANDRA_PASSWORD=pass
       - HEAP_NEWSIZE=256M
       - MAX_HEAP_SIZE=1G
     ports:
       - 7000:7000
       - 9042:9042
-    restart: ${RESTART_MODE}
+    networks:
+      - cassandra_shared_network
+    restart: unless-stopped
     volumes:
       - ./cassandra_data:/var/lib/cassandra
+volumes:
+  cassandra_data:
+
+
+networks:
+  cassandra_shared_network:
+    name: cassandra_shared_network
+    driver: bridge

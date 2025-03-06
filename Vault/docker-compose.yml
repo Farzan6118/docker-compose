@@ -1,0 +1,21 @@
+services:
+  vault:
+    container_name: vault
+    image: hashicorp/vault:1.17.3
+    ports:
+      - "8200:8200"
+    restart: unless-stopped
+    environment:
+      - VAULT_DEV_ROOT_TOKEN_ID=root
+    volumes:
+      - vault_data:/vault/data
+    networks:
+      - postgres_shared_network
+
+volumes:
+  vault_data:
+
+
+networks:
+  postgres_shared_network:
+    external: true

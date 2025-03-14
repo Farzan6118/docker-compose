@@ -11,6 +11,7 @@ services:
       KC_DB_PASSWORD: pass
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
       KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_FEATURES: account-api,token-exchange
     ports:
       - "8180:8080"
     restart: unless-stopped

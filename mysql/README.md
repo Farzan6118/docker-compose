@@ -1,2 +1,2 @@
 ## docker-compose
-mysql:9.2.0
+mysql:8.0.27

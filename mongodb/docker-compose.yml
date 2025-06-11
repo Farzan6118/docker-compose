@@ -1,18 +1,17 @@
 services:
   mongo:
     container_name: mongodb
-    image: mongo:8.0.9
-    command: mongod
+    image: mongo:8.0.10
     environment:
       MONGO_INITDB_ROOT_USERNAME: user
       MONGO_INITDB_ROOT_PASSWORD: pass
     ports:
       - "27017:27017"
     volumes:
-      - ./mongo_data:/data/db
+      - mongo_data:/data/db
     restart: unless-stopped
     healthcheck:
-      test: [ "CMD", "mongo", "--eval", "db.adminCommand('ping')" ]
+      test: [ "CMD", "powershell", "-command", "try { (Test-NetConnection -ComputerName localhost -Port 27017).TcpTestSucceeded } catch { exit 1 }" ]
       interval: 30s
       timeout: 10s
       retries: 5

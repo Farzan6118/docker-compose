@@ -1,0 +1,31 @@
+services:
+  n8n:
+    image: n8nio/n8n:stable
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      DB_TYPE: postgres
+      DB_POSTGRESDB_HOST: postgresql
+      DB_POSTGRESDB_PORT: 5432
+      DB_POSTGRESDB_DATABASE: postgres
+      DB_POSTGRESDB_USER: user
+      DB_POSTGRESDB_PASSWORD: pass
+      N8N_BASIC_AUTH_ACTIVE: true
+      N8N_BASIC_AUTH_USER: admin
+      N8N_BASIC_AUTH_PASSWORD: pass
+      N8N_HOST: n8n.local
+      N8N_PORT: 5678
+      WEBHOOK_URL: http://localhost:5678
+    networks:
+      - postgres_shared_network
+    volumes:
+      - n8n-data:/home/node/.n8n
+
+volumes:
+  n8n-data:
+
+
+networks:
+  postgres_shared_network:
+    external: true

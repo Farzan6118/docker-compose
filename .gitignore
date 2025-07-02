@@ -28,3 +28,5 @@ Neo4j/neo4j_plugins
 RabbitMQ/rabbitmq_data
 
 Redis/redis_data
+
+n8n/n8n-data

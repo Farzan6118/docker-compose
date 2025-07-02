@@ -20,7 +20,7 @@ services:
     networks:
       - postgres_shared_network
     volumes:
-      - n8n-data:/home/node/.n8n
+      - ./n8n-data:/home/node/.n8n
 
 volumes:
   n8n-data:

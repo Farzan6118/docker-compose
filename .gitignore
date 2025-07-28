@@ -1,32 +1,39 @@
-Elasticsearch/elastic_data
-Elasticsearch/elastic_config
+# authentication
+authentication/Keycloak/pgadmin_data
+authentication/Keycloak/postgres_data
 
-HashiCorp/vault_data
+# databases
+databases/Cassandra/cassandra_data
+databases/MongoDB/mongo_data
+databases/MySQL/mysql_data
+databases/Neo4j/neo4j_conf
+databases/Neo4j/neo4j_data
+databases/Neo4j/neo4j_logs
+databases/Neo4j/neo4j_plugins
+databases/PostgreSQL/pgadmin_data
+databases/PostgreSQL/postgres_data
+databases/Redis/redis_data
 
-Apache_Cassandra/cassandra_data
+# devtools
+devtools/MailDev/n8n-data   # likely misnamed; MailDev doesn't need data, but n8n does
 
-Apache_Kafka/kafka_data
-Apache_Kafka/zookeeper_data
+# infrastructure
+infrastructure/Vault/vault_data
 
-Keycloak/pgadmin_data
-Keycloak/postgres_data
+# messaging
+messaging/Kafka/kafka_data
+messaging/Kafka/zookeeper_data
+messaging/RabbitMQ/rabbitmq_data
 
-MinIO/templates
+# object-storage
+object-storage/MinIO/templates
 
-MongoDB/mongo_data
+# observability
+observability/Zipkin/   # no persistent data needed, but can create logs/zipkin_data if needed
 
-MySQL/mysql_data
+# orchestration
+orchestration/n8n/n8n-data
 
-PostgreSQL/pgadmin_data
-PostgreSQL/postgres_data
-
-Neo4j/neo4j_conf
-Neo4j/neo4j_data
-Neo4j/neo4j_logs
-Neo4j/neo4j_plugins
-
-RabbitMQ/rabbitmq_data
-
-Redis/redis_data
-
-n8n/n8n-data
+# search-analytics
+search-analytics/elasticstack/Elasticsearch/elastic_data
+search-analytics/elasticstack/Elasticsearch/elastic_config

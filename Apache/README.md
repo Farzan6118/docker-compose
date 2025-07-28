@@ -1,3 +1,3 @@
 ## docker-compose
 cassandra:4.1.3
-kafka
+bitnami/kafka:3.9.0

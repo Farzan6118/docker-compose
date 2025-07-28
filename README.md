@@ -1,58 +1,79 @@
-# Docker Compose
+# ⚙️ Docker Compose Collection
 
-## Overview
+## 📖 Overview
 
-The Docker Compose project contains Docker Compose files along with `.env` files for some of the most commonly used technologies by developers. Each technology is organized into its own folder, making it easy to download and run.
+This project provides a curated collection of Docker Compose setups for many popular technologies used by developers.  
+Each technology is organized into its own folder, containing a `docker-compose.yml` file and optional `.env` configuration, making it easy to run and test services locally.
 
-## Getting Started
+---
 
-To get started with the project, follow these steps:
+## 🚀 Getting Started
+
+To get started with the project:
 
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/.../docker-compose.git
    cd docker-compose
    ```
-2. **Navigate to the desired folder**:
-Each folder contains a Docker Compose file and a corresponding ```.env``` file. Choose the folder for the technology you want to use.
+
+2. **Navigate to the desired folder**:  
+   Each folder contains a `docker-compose.yml` file and a corresponding `.env` file (if needed). Choose the folder for the technology you want to use.
 
 3. **Run Docker Compose**:
-Execute the following command in the folder:
    ```bash
    docker compose up
    ```
-This command will start the Docker containers defined in the ```docker-compose.yml``` file for that technology.
+   This command will start the containers defined in the `docker-compose.yml` file for the selected service.
 
-## Folder Structure
-The project includes the following folders, each named according to the Docker images they contain:
+---
 
-- Apache
-   - Camel
-   - Cassandra
-   - Kafka
-- Camunda
-- Elastic
-   - elasticsearch
-   - logstash
-   - kibana
-- Hashicorp
-   - console
-   - vault
-- Keycloak
-- MinIO
-- MongoDB
-- MySQL
-- Neo4j
-- PostgreSQL
-- RabbitMQ
-- Redis
- 
-## Notes
-Ensure that you have Docker and Docker Compose installed on your machine before running the commands.
-Each folder contains specific configurations and environment variables customized for the respective technology.
+## 📁 Folder Structure
 
-## Contributing
-Feel free to contribute to this project by submitting issues or pull requests. Your contributions are welcome!
+The repository is organized by technology and includes the following folders:
 
-## License
-Feel free to modify any sections as needed!
+- **Apache**
+  - Cassandra
+  - Kafka
+- **Camunda**
+- **Elastic Stack**
+  - Elasticsearch
+  - Logstash
+  - Kibana
+- **HashiCorp**
+  - Consul
+  - Vault
+- **Keycloak**
+- **MinIO**
+- **MongoDB**
+- **MySQL**
+- **Neo4j**
+- **Node.js**
+- **n8n**
+- **PostgreSQL**
+- **RabbitMQ**
+- **Redis**
+
+Each folder is self-contained with its own Docker Compose file, allowing you to quickly spin up isolated environments.
+
+---
+
+## ⚠️ Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/)
+
+Make sure both are installed and properly configured on your system.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!  
+If you'd like to add a new technology or improve an existing setup, feel free to submit a pull request or open an issue.
+
+---
+
+## 📄 License
+
+This project is open-source. Feel free to fork and adapt it for your own use.

@@ -12,8 +12,6 @@ databases/Neo4j/neo4j_logs
 databases/Neo4j/neo4j_plugins
 databases/PostgreSQL/pgadmin_data
 databases/PostgreSQL/postgres_data
-databases/PostgreSQL/postgres_data/pg_xact/0000
-databases/PostgreSQL/postgres_data/pg_subtrans/0000
 databases/Redis/redis_data
 
 # devtools
@@ -40,3 +38,5 @@ orchestration/n8n/n8n-data
 search-analytics/elasticstack/Elasticsearch/elastic_data
 search-analytics/elasticstack/Elasticsearch/elastic_config
 
+databases/PostgreSQL/postgres_data/global/pg_control
+databases/PostgreSQL/postgres_data/pg_subtrans/0000

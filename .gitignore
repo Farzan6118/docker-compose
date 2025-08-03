@@ -40,3 +40,4 @@ search-analytics/elasticstack/Elasticsearch/elastic_config
 
 databases/PostgreSQL/postgres_data/global/pg_control
 databases/PostgreSQL/postgres_data/pg_subtrans/0000
+databases/PostgreSQL/postgres_data/global/pg_control

@@ -1,0 +1,62 @@
+services:
+  zeebe:
+    image: camunda/zeebe:8.5.4
+    restart: unless-stopped
+    environment:
+      ZEEBE_BROKER_CLUSTER_PARTITIONSCOUNT: 1
+      ZEEBE_BROKER_CLUSTER_REPLICATIONFACTOR: 1
+      ZEEBE_BROKER_CLUSTER_CLUSTERSIZE: 1
+      ZEEBE_BROKER_GATEWAY_ENABLE: "true"
+    ports:
+      - "26500:26500" # gRPC
+    networks:
+      - zeebe_shared_network
+
+  operate:
+    image: camunda/operate:8.5.4
+    restart: unless-stopped
+    depends_on:
+      - zeebe
+      - elasticsearch
+    environment:
+      CAMUNDA_OPERATE_ZEEBE_GATEWAYADDRESS: zeebe:26500
+      CAMUNDA_OPERATE_ELASTICSEARCH_URL: http://elasticsearch:9200
+    ports:
+      - "8081:8080"
+    networks:
+      - zeebe_shared_network
+
+  tasklist:
+    image: camunda/tasklist:8.5.4
+    restart: unless-stopped
+    depends_on:
+      - zeebe
+      - elasticsearch
+    environment:
+      CAMUNDA_TASKLIST_ZEEBE_GATEWAYADDRESS: zeebe:26500
+      CAMUNDA_TASKLIST_ELASTICSEARCH_URL: http://elasticsearch:9200
+    ports:
+      - "8082:8080"
+    networks:
+      - zeebe_shared_network
+
+  elasticsearch:
+    image: elasticsearch:7.17.3
+    restart: unless-stopped
+    environment:
+      discovery.type: single-node
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+    networks:
+      - zeebe_shared_network
+    volumes:
+      - zeebe-elasticsearch-data:/usr/share/elasticsearch/data
+
+volumes:
+  zeebe-elasticsearch-data:
+
+
+networks:
+  zeebe_shared_network:
+    external: true

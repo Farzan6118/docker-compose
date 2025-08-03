@@ -1,0 +1,22 @@
+services:
+  solr:
+    image: solr:9.6
+    container_name: solr
+    restart: unless-stopped
+    ports:
+      - "8983:8983" # Solr UI/API
+    volumes:
+      - solr-data:/var/solr
+    networks:
+      - solr_shared_network
+    command:
+      - solr-precreate
+      - mycore # Name of your Lucene core
+
+volumes:
+  solr-data:
+
+
+networks:
+  solr_shared_network:
+    external: true # Or remove this line if not shared

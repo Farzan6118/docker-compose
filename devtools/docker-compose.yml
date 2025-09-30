@@ -1,8 +1,0 @@
-services:
-  mailhog:
-    image: ghcr.io/cloudogu/mailhog:latest
-    container_name: mailhog
-    ports:
-      - "1025:1025"   # SMTP port
-      - "8025:8025"   # Web UI
-    restart: unless-stopped

@@ -2,7 +2,7 @@ services:
   node-app:
     container_name: node-app
     image: docker.m.daocloud.io/library/node:lts-alpine
-    command: npm run start
+    command: sh -c "while true; do sleep 3600; done"
     working_dir: /usr/src/app
     environment:
       - NODE_ENV=development
@@ -11,7 +11,6 @@ services:
       - "3000:3000"
     volumes:
       - .:/usr/src/app
-      - /usr/src/app/node_modules
     restart: unless-stopped
     networks:
       - app_shared_network

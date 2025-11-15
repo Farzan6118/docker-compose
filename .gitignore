@@ -11,7 +11,7 @@ Apache_Kafka/zookeeper_data
 Keycloak/pgadmin_data
 Keycloak/postgres_data
 
-MinIO/templates
+minio/minio_data
 
 MongoDB/mongo_data
 

@@ -7,7 +7,7 @@ services:
       - MINIO_ROOT_PASSWORD=minioAdmin
     image: minio/minio:RELEASE.2025-05-24T17-08-30Z
     networks:
-      - minio_net
+      - minio_shared_network
     ports:
       - 9000:9000
       - 9001:9001
@@ -16,4 +16,7 @@ services:
       - ~/minio/data:/data
 
 networks:
-  minio_net:
+  minio_shared_network:
+    name: minio_shared_network
+    driver: bridge
+

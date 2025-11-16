@@ -1,2 +1,2 @@
 ## docker-compose
-mongo:8.2.1
+grafana/loki:2.9.0

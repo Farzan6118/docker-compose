@@ -36,12 +36,12 @@ RabbitMQ/rabbitmq_data/
 # ----------------------------
 # Object Storage
 # ----------------------------
-MinIO/templates/
+minio/minio_data
 
 # ----------------------------
 # Observability
 # ----------------------------
-Zipkin/
+zipkin/
 
 # ----------------------------
 # Orchestration

@@ -17,12 +17,14 @@ services:
     restart: unless-stopped
     networks:
       - postgres_shared_network
+      - keycloak_shared_network
     volumes:
-      # فولدر Theme سفارشی
       - ./themes:/opt/keycloak/themes
-      # فولدر Custom SPI ها
       - ./spi:/opt/keycloak/providers
 
 networks:
   postgres_shared_network:
     external: true
+  keycloak_shared_network:
+    name: keycloak_shared_network
+    driver: bridge

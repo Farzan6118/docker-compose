@@ -27,4 +27,3 @@ networks:
   rabbitmq_shared_network:
     name: rabbitmq_shared_network
     driver: bridge
-

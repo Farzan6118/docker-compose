@@ -1,13 +1,13 @@
 services:
   redis:
-    container_name: Redis
+    container_name: redis
     image: redis:8.2.3-alpine3.22
     ports:
       - "6379:6379"
     volumes:
       - redis_data:/data
     networks:
-      - shared_network
+      - redis_shared_network
     restart: unless-stopped
     healthcheck:
       test: [ "CMD", "redis-cli", "ping" ]
@@ -18,6 +18,8 @@ services:
 volumes:
   redis_data:
 
+
 networks:
-  shared_network:
+  redis_shared_network:
+    name: redis_shared_network
     driver: bridge

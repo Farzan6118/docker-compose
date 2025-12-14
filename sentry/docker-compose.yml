@@ -11,7 +11,7 @@ services:
       SENTRY_DB_HOST: postgres
     ports:
       - "9009:9000"
-    restart: always
+    restart: unless-stopped
     networks:
       - sentry_net
       - redis_shared_network

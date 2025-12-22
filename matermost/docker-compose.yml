@@ -15,6 +15,7 @@ services:
 volumes:
   mattermost_data:
 
+
 networks:
   postgres_shared_network:
     external: true
